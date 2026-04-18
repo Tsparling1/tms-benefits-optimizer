@@ -1,48 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Employee Benefits Optimizer | TMS Solutions Group</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', sans-serif;
       background: #FAFAF7;
-      color: #1A1A1A;
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      color: #1a1a1a;
+      min-height: 100vh;
     }
 
-    .site-header {
-      background: #B8860B;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .site-header .brand {
-      color: #fff;
-      font-weight: 700;
+    .tms-header {
+      background: #1a1a1a;
+      color: #FAFAF7;
+      text-align: center;
+      padding: 14px 20px;
       font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .site-header .contact {
-      color: rgba(255,255,255,0.85);
-      font-size: 12px;
-    }
+    .tms-header span { color: #B8860B; font-weight: 600; }
 
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
-    /* ===== LANDING ===== */
-    #landing { padding: 52px 0 72px; }
+    /* ---- LANDING ---- */
+    #landing { padding: 56px 0 80px; }
 
     .pill {
       display: inline-block;
@@ -50,98 +37,112 @@
       color: #fff;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      padding: 6px 18px;
-      border-radius: 100px;
-      margin-bottom: 22px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 22px;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 42px;
-      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
       line-height: 1.15;
-      margin-bottom: 22px;
-      color: #1A1A1A;
+      color: #1a1a1a;
+      margin-bottom: 18px;
     }
 
-    .bullets {
-      list-style: none;
-      margin-bottom: 40px;
+    .subtitle {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 28px;
+      line-height: 1.6;
     }
+
+    .bullets { list-style: none; margin-bottom: 40px; }
+
     .bullets li {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      margin-bottom: 14px;
-      font-size: 16px;
-      color: #444;
+      font-size: 15px;
+      color: #333;
+      margin-bottom: 12px;
+      line-height: 1.5;
     }
+
     .bullets li::before {
       content: '';
-      display: block;
-      width: 8px;
-      height: 8px;
-      min-width: 8px;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
       background: #B8860B;
       border-radius: 50%;
-      margin-top: 8px;
+      margin-top: 2px;
     }
 
-    .form-card {
+    /* ---- FORM CARD ---- */
+    .card {
       background: #fff;
-      border-radius: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
       padding: 36px;
-      box-shadow: 0 4px 28px rgba(0,0,0,0.07);
     }
 
-    .form-group { margin-bottom: 24px; }
-    .form-group label {
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 24px;
+      color: #1a1a1a;
+    }
+
+    .form-group { margin-bottom: 22px; }
+
+    label {
       display: block;
+      font-size: 13px;
       font-weight: 600;
-      font-size: 14px;
-      margin-bottom: 8px;
-      color: #1A1A1A;
+      color: #444;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
     }
-    .form-group .optional {
-      color: #999;
-      font-weight: 400;
-      font-size: 12px;
-      margin-left: 6px;
-    }
-    .form-group input[type="text"],
-    .form-group input[type="number"] {
+
+    .optional { font-weight: 400; color: #888; font-size: 12px; }
+
+    input[type="text"],
+    input[type="number"] {
       width: 100%;
-      padding: 13px 16px;
-      border: 2px solid #E8E8E5;
-      border-radius: 10px;
-      font-size: 16px;
+      padding: 11px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
       font-family: 'Inter', sans-serif;
       background: #FAFAF7;
       transition: border-color 0.2s;
-      color: #1A1A1A;
     }
-    .form-group input:focus {
+
+    input[type="text"]:focus,
+    input[type="number"]:focus {
       outline: none;
       border-color: #B8860B;
     }
 
-    .toggle-section-label {
+    .section-label {
+      font-size: 13px;
       font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       color: #B8860B;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       margin-bottom: 14px;
-      margin-top: 4px;
+      margin-top: 8px;
     }
 
-    .toggle-grid {
+    .toggles-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .toggle-item {
@@ -149,1024 +150,991 @@
       align-items: center;
       justify-content: space-between;
       background: #FAFAF7;
-      border: 2px solid #E8E8E5;
-      border-radius: 10px;
-      padding: 14px 16px;
+      border: 1.5px solid #e8e8e2;
+      border-radius: 8px;
+      padding: 12px 14px;
       cursor: pointer;
       transition: border-color 0.2s;
       user-select: none;
     }
-    .toggle-item:hover { border-color: #B8860B; }
-    .toggle-item.active { border-color: #27AE60; background: #F0FAF4; }
 
-    .toggle-label-text { font-size: 14px; font-weight: 500; }
+    .toggle-item.active { border-color: #B8860B; background: #fffbf0; }
+
+    .toggle-label { font-size: 14px; font-weight: 500; color: #1a1a1a; }
 
     .toggle-switch {
-      position: relative;
-      width: 44px;
+      width: 42px;
       height: 24px;
+      background: #ddd;
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
       flex-shrink: 0;
     }
-    .toggle-switch input { display: none; }
-    .toggle-track {
+
+    .toggle-switch::after {
+      content: '';
       position: absolute;
-      inset: 0;
-      background: #D0D0CC;
-      border-radius: 100px;
-      transition: background 0.2s;
-    }
-    .toggle-thumb {
-      position: absolute;
-      top: 3px;
-      left: 3px;
       width: 18px;
       height: 18px;
       background: #fff;
       border-radius: 50%;
+      top: 3px;
+      left: 3px;
       transition: transform 0.2s;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
     }
-    .toggle-switch input:checked ~ .toggle-track { background: #27AE60; }
-    .toggle-switch input:checked ~ .toggle-thumb { transform: translateX(20px); }
 
-    .calc-btn {
+    .toggle-item.active .toggle-switch { background: #B8860B; }
+    .toggle-item.active .toggle-switch::after { transform: translateX(18px); }
+
+    .cta-btn {
       width: 100%;
+      padding: 15px;
       background: #B8860B;
-      color: #1A1A1A;
-      font-family: 'Inter', sans-serif;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
       font-size: 16px;
       font-weight: 700;
-      padding: 17px;
-      border: none;
-      border-radius: 10px;
       cursor: pointer;
-      margin-top: 28px;
-      transition: opacity 0.2s;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.3px;
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.1s;
     }
-    .calc-btn:hover { opacity: 0.88; }
+
+    .cta-btn:hover { background: #9a7009; }
+    .cta-btn:active { transform: scale(0.99); }
 
     .no-signup {
       text-align: center;
+      color: #888;
       font-size: 13px;
-      color: #999;
       margin-top: 12px;
     }
 
-    /* ===== RESULTS ===== */
-    #results { padding: 52px 0 72px; }
+    .error-msg { color: #C0392B; font-size: 13px; margin-top: 6px; display: none; }
 
-    .results-heading {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-    .results-heading h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .results-heading p {
-      color: #888;
-      font-size: 15px;
-    }
+    /* ---- RESULTS ---- */
+    #results { display: none; padding: 40px 0 80px; }
 
-    /* Score ring */
-    .score-wrap {
+    .score-banner {
+      border-radius: 12px;
+      padding: 28px 36px;
+      margin-bottom: 28px;
+      color: #fff;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      margin-bottom: 44px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
     }
-    .ring-container {
-      position: relative;
-      width: 168px;
-      height: 168px;
+
+    .score-banner .score-left h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
     }
-    .ring-container svg { transform: rotate(-90deg); }
-    .ring-overlay {
-      position: absolute;
-      inset: 0;
+
+    .score-banner .score-left p { font-size: 14px; opacity: 0.9; }
+
+    .score-circle {
+      width: 80px;
+      height: 80px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
-    .ring-score {
-      font-family: 'Playfair Display', serif;
-      font-size: 46px;
-      font-weight: 700;
-      line-height: 1;
-    }
-    .ring-of { font-size: 13px; color: #999; margin-top: 2px; }
-    .score-pill {
-      margin-top: 14px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      padding: 7px 22px;
-      border-radius: 100px;
-    }
-    .pill-red    { background: #FDECEA; color: #C0392B; }
-    .pill-yellow { background: #FEF3E7; color: #E67E22; }
-    .pill-green  { background: #EAFAF1; color: #27AE60; }
 
-    /* Metric cards */
-    .metric-row {
+    .score-circle .score-num {
+      font-size: 28px;
+      font-weight: 900;
+      font-family: 'Playfair Display', serif;
+    }
+    .score-circle .score-denom { font-size: 12px; opacity: 0.8; }
+
+    .metrics-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 44px;
-    }
-    .metric-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 22px 16px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      text-align: center;
-    }
-    .metric-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: #1A1A1A;
-      margin-bottom: 5px;
-    }
-    .metric-lbl {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: #999;
-    }
-    .metric-note {
-      font-size: 12px;
-      font-weight: 500;
-      margin-top: 6px;
-    }
-
-    /* Section headings */
-    .sec-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
-
-    /* Gap table */
-    .gap-table {
-      background: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      margin-bottom: 44px;
-    }
-    .gap-thead {
-      display: grid;
-      grid-template-columns: 1fr 110px 140px;
-      background: #1A1A1A;
-      padding: 13px 20px;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .gap-row {
-      display: grid;
-      grid-template-columns: 1fr 110px 140px;
-      padding: 13px 20px;
-      border-bottom: 1px solid #F0F0ED;
-      align-items: center;
-    }
-    .gap-row:last-child { border-bottom: none; }
-    .gap-row:nth-child(even) { background: #FAFAF7; }
-    .benefit-name { font-weight: 500; font-size: 15px; }
-    .badge {
-      display: inline-block;
-      padding: 4px 13px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .badge-yes    { background: #EAFAF1; color: #27AE60; }
-    .badge-no     { background: #FDECEA; color: #C0392B; }
-    .badge-high   { background: #FDECEA; color: #C0392B; }
-    .badge-medium { background: #FEF3E7; color: #E67E22; }
-    .badge-low    { background: #EAFAF1; color: #27AE60; }
-    .no-gap       { font-size: 13px; color: #bbb; }
-
-    /* Rec cards */
-    .rec-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      margin-bottom: 16px;
-      border-left: 5px solid #B8860B;
-    }
-    .rec-priority {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: #B8860B;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .rec-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      margin-bottom: 14px;
-    }
-    .rec-stats { display: flex; gap: 28px; }
-    .rec-stat-val { font-size: 18px; font-weight: 700; color: #1A1A1A; }
-    .rec-stat-lbl { font-size: 12px; color: #888; }
-
-    .all-good {
-      background: #fff;
-      border-radius: 14px;
-      padding: 28px 24px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-      border-left: 5px solid #27AE60;
+      gap: 14px;
       margin-bottom: 28px;
     }
-    .all-good-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      color: #27AE60;
+
+    .metric-box {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .metric-box .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: 8px;
     }
 
-    .pdf-btn {
-      width: 100%;
-      background: #1A1A1A;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      padding: 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 8px;
-      margin-bottom: 14px;
-      transition: opacity 0.2s;
+    .metric-box .metric-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      font-family: 'Playfair Display', serif;
     }
-    .pdf-btn:hover { opacity: 0.85; }
 
-    .start-over { text-align: center; font-size: 14px; color: #999; }
-    .start-over a { color: #B8860B; text-decoration: none; cursor: pointer; }
+    .metric-box .metric-sub { font-size: 11px; color: #aaa; margin-top: 4px; }
+    .metric-box.highlight .metric-value { color: #B8860B; }
 
-    /* Footer */
-    .site-footer {
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+      color: #1a1a1a;
+    }
+
+    /* ---- GAP TABLE ---- */
+    .gap-table-wrap {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    th {
+      background: #1a1a1a;
+      color: #FAFAF7;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    td {
+      padding: 12px 14px;
+      font-size: 13px;
+      border-bottom: 1px solid #f0f0ea;
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #FAFAF7; }
+
+    .status-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-green { background: #e8f8ed; color: #27AE60; }
+    .badge-red   { background: #fdecea; color: #C0392B; }
+
+    .risk-high   { color: #C0392B; font-weight: 700; }
+    .risk-medium { color: #E67E22; font-weight: 600; }
+    .risk-low    { color: #27AE60; font-weight: 600; }
+
+    /* ---- IMPROVEMENTS ---- */
+    .improvements { margin-bottom: 28px; }
+
+    .improvement-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 20px 24px;
+      margin-bottom: 14px;
+      border-left: 4px solid #B8860B;
+    }
+
+    .improvement-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .improvement-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .improvement-meta span { font-size: 12px; color: #666; }
+    .improvement-meta strong { color: #1a1a1a; }
+
+    .improvement-context { font-size: 12px; color: #B8860B; font-style: italic; }
+
+    /* ---- DOWNLOAD / CTA ---- */
+    .download-btn {
+      width: 100%;
+      padding: 15px;
+      background: #1a1a1a;
+      color: #FAFAF7;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: background 0.2s;
+    }
+
+    .download-btn:hover { background: #333; }
+
+    .tms-cta {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 28px 24px;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .tms-cta h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 8px; }
+    .tms-cta p { font-size: 14px; color: #555; margin-bottom: 16px; line-height: 1.6; }
+    .tms-cta a {
+      display: inline-block;
       background: #B8860B;
       color: #fff;
-      text-align: center;
-      padding: 15px 24px;
-      font-size: 13px;
+      text-decoration: none;
+      padding: 11px 24px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
     }
 
-    @media (max-width: 620px) {
-      h1 { font-size: 30px; }
-      .toggle-grid { grid-template-columns: 1fr; }
-      .metric-row { grid-template-columns: 1fr; }
-      .gap-thead, .gap-row { grid-template-columns: 1fr 90px 110px; font-size: 13px; }
-      .form-card { padding: 24px; }
+    .page-footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e8e8e2;
+    }
+
+    @media (max-width: 600px) {
+      .metrics-grid { grid-template-columns: 1fr; }
+      .toggles-grid { grid-template-columns: 1fr; }
+      .card { padding: 24px 18px; }
+      .score-banner { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-<!-- ===== SITE HEADER ===== -->
-<header class="site-header">
-  <div class="brand">TMS Solutions Group</div>
-  <div class="contact">tom@tms-solutions-group.com &middot; 386-387-8620</div>
-</header>
+<div class="tms-header">
+  <span>TMS Solutions Group</span> &nbsp;|&nbsp; tom@tms-solutions-group.com &nbsp;&middot;&nbsp; tms-solutions-group.com &nbsp;&middot;&nbsp; 386-387-8620
+</div>
 
-<!-- ===== LANDING ===== -->
-<section id="landing">
+<!-- ========== LANDING ========== -->
+<div id="landing">
   <div class="container">
-    <div class="pill">Free Calculator</div>
-    <h1>Employee Benefits Optimizer</h1>
-    <ul class="bullets">
-      <li>Compare your benefits spend against the SHRM $14,500 national benchmark</li>
-      <li>Score your benefits package and quantify its real retention value</li>
-      <li>Discover which gaps are driving employee turnover and what to fix first</li>
-    </ul>
+    <div style="padding-top: 56px;">
+      <div class="pill">Free Calculator</div>
+      <h1>Employee Benefits<br>Optimizer</h1>
+      <p class="subtitle">Find out how your benefits package stacks up against industry benchmarks &mdash; and what it's costing you in turnover.</p>
+      <ul class="bullets">
+        <li>Identify your coverage gaps vs. BLS, KFF, and SHRM benchmarks</li>
+        <li>Calculate your estimated annual retention value from improved benefits</li>
+        <li>Get personalized recommendations with monthly cost estimates per employee</li>
+      </ul>
+    </div>
 
-    <div class="form-card">
+    <div class="card">
+      <h2>Enter Your Details</h2>
+
       <div class="form-group">
         <label>Business Name <span class="optional">(optional)</span></label>
-        <input type="text" id="businessName" placeholder="Your company name">
+        <input type="text" id="bizName" placeholder="e.g. Acme Landscaping" />
       </div>
+
       <div class="form-group">
         <label>Number of Employees</label>
-        <input type="number" id="numEmployees" placeholder="e.g. 25" min="1">
+        <input type="number" id="employees" placeholder="e.g. 25" min="1" />
+        <div class="error-msg" id="err-employees">Please enter a valid number of employees (1 or more).</div>
       </div>
+
       <div class="form-group">
         <label>Current Total Monthly Benefits Spend ($)</label>
-        <input type="number" id="monthlySpend" placeholder="e.g. 12500" min="0" step="100">
+        <input type="number" id="monthlySpend" placeholder="e.g. 8500" min="0" />
+        <div class="error-msg" id="err-spend">Please enter a valid monthly benefits spend (0 or more).</div>
       </div>
 
-      <div class="toggle-section-label">Which benefits do you currently offer?</div>
-      <div class="toggle-grid">
-        <label class="toggle-item" for="hasHealth" id="labelHealth">
-          <span class="toggle-label-text">Health Insurance</span>
-          <div class="toggle-switch">
-            <input type="checkbox" id="hasHealth" onchange="syncToggleStyle('labelHealth','hasHealth')">
-            <div class="toggle-track"></div>
-            <div class="toggle-thumb"></div>
-          </div>
-        </label>
-        <label class="toggle-item" for="hasRetirement" id="labelRetirement">
-          <span class="toggle-label-text">Retirement / 401(k)</span>
-          <div class="toggle-switch">
-            <input type="checkbox" id="hasRetirement" onchange="syncToggleStyle('labelRetirement','hasRetirement')">
-            <div class="toggle-track"></div>
-            <div class="toggle-thumb"></div>
-          </div>
-        </label>
-        <label class="toggle-item" for="hasPTO" id="labelPTO">
-          <span class="toggle-label-text">PTO / Paid Leave</span>
-          <div class="toggle-switch">
-            <input type="checkbox" id="hasPTO" onchange="syncToggleStyle('labelPTO','hasPTO')">
-            <div class="toggle-track"></div>
-            <div class="toggle-thumb"></div>
-          </div>
-        </label>
-        <label class="toggle-item" for="hasDental" id="labelDental">
-          <span class="toggle-label-text">Dental / Vision</span>
-          <div class="toggle-switch">
-            <input type="checkbox" id="hasDental" onchange="syncToggleStyle('labelDental','hasDental')">
-            <div class="toggle-track"></div>
-            <div class="toggle-thumb"></div>
-          </div>
-        </label>
-      </div>
-
-      <button class="calc-btn" onclick="calculate()">Calculate My Benefits Score</button>
-      <p class="no-signup">No sign-up required. Results shown instantly.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== RESULTS ===== -->
-<section id="results" style="display:none">
-  <div class="container">
-
-    <div class="results-heading">
-      <h2 id="resultsTitle">Your Benefits Score</h2>
-      <p id="resultsSubtitle"></p>
-    </div>
-
-    <!-- Score Ring -->
-    <div class="score-wrap">
-      <div class="ring-container">
-        <svg width="168" height="168" viewBox="0 0 168 168">
-          <circle cx="84" cy="84" r="72" fill="none" stroke="#E8E8E5" stroke-width="14"/>
-          <circle id="scoreArc" cx="84" cy="84" r="72" fill="none" stroke="#27AE60"
-            stroke-width="14" stroke-linecap="round"
-            stroke-dasharray="452.4 452.4" stroke-dashoffset="452.4"/>
-        </svg>
-        <div class="ring-overlay">
-          <div id="ringScore" class="ring-score" style="color:#27AE60">0</div>
-          <div class="ring-of">out of 100</div>
+      <div class="section-label">Benefits Currently Offered</div>
+      <div class="toggles-grid">
+        <div class="toggle-item" id="toggle-health" onclick="toggleBenefit('health')">
+          <span class="toggle-label">Health Insurance</span>
+          <div class="toggle-switch"></div>
+        </div>
+        <div class="toggle-item" id="toggle-retirement" onclick="toggleBenefit('retirement')">
+          <span class="toggle-label">Retirement / 401(k)</span>
+          <div class="toggle-switch"></div>
+        </div>
+        <div class="toggle-item" id="toggle-pto" onclick="toggleBenefit('pto')">
+          <span class="toggle-label">PTO / Paid Leave</span>
+          <div class="toggle-switch"></div>
+        </div>
+        <div class="toggle-item" id="toggle-dental" onclick="toggleBenefit('dental')">
+          <span class="toggle-label">Dental &amp; Vision</span>
+          <div class="toggle-switch"></div>
         </div>
       </div>
-      <div id="scorePill" class="score-pill pill-green">Strong Foundation</div>
+
+      <button class="cta-btn" onclick="calculate()">Calculate My Benefits Score</button>
+      <p class="no-signup">No sign-up required. Results shown instantly.</p>
+    </div>
+    <div style="padding-bottom: 80px;"></div>
+  </div>
+</div>
+
+<!-- ========== RESULTS ========== -->
+<div id="results">
+  <div class="container">
+
+    <div class="score-banner" id="score-banner">
+      <div class="score-left">
+        <h3 id="score-level-text"></h3>
+        <p id="score-sub-text"></p>
+      </div>
+      <div class="score-circle">
+        <div class="score-num" id="score-num"></div>
+        <div class="score-denom">/ 100</div>
+      </div>
     </div>
 
-    <!-- Metric Cards -->
-    <div class="metric-row">
-      <div class="metric-card">
-        <div id="mCostPerEmp" class="metric-val">$0</div>
-        <div class="metric-lbl">Annual Cost / Employee</div>
-        <div id="mCostNote" class="metric-note"></div>
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-label">Your Annual Cost Per Employee</div>
+        <div class="metric-value" id="metric-your-cost"></div>
+        <div class="metric-sub">based on your inputs</div>
       </div>
-      <div class="metric-card">
-        <div class="metric-val">$14,500</div>
-        <div class="metric-lbl">SHRM Benchmark</div>
-        <div class="metric-note" style="color:#B8860B">National Average</div>
+      <div class="metric-box">
+        <div class="metric-label">Industry Benchmark</div>
+        <div class="metric-value">$13,800</div>
+        <div class="metric-sub">BLS avg per employee / year</div>
       </div>
-      <div class="metric-card">
-        <div id="mRetention" class="metric-val">$0</div>
-        <div class="metric-lbl">Retention Value</div>
-        <div class="metric-note" style="color:#B8860B">Annual Turnover Savings</div>
+      <div class="metric-box highlight">
+        <div class="metric-label">Est. Annual Retention Value</div>
+        <div class="metric-value" id="metric-retention"></div>
+        <div class="metric-sub">from full benefits adoption</div>
       </div>
     </div>
 
-    <!-- Gap Analysis -->
-    <h3 class="sec-title">Benefits Coverage Analysis</h3>
-    <div class="gap-table">
-      <div class="gap-thead">
-        <span>Benefit</span>
-        <span>Status</span>
-        <span>Turnover Risk</span>
-      </div>
-      <div id="gapRows"></div>
+    <div class="section-title">Benefits Gap Analysis</div>
+    <div class="gap-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Benefit</th>
+            <th>Status</th>
+            <th>Turnover Risk</th>
+            <th>Employee Priority</th>
+            <th>Peer Adoption</th>
+          </tr>
+        </thead>
+        <tbody id="gap-table-body"></tbody>
+      </table>
     </div>
 
-    <!-- Recommendations -->
-    <h3 class="sec-title">Top Recommendations</h3>
-    <div id="recCards"></div>
+    <div class="section-title">Top Recommendations</div>
+    <div class="improvements" id="improvements-list"></div>
 
-    <!-- PDF -->
-    <button class="pdf-btn" onclick="generatePDF()">Download Full PDF Report</button>
-    <div class="start-over"><a onclick="resetCalc()">Start Over</a></div>
+    <button class="download-btn" onclick="generatePDF()">Download Full PDF Report</button>
+
+    <div class="tms-cta">
+      <h3>Ready to Build a Better Benefits Package?</h3>
+      <p>TMS Solutions Group helps small businesses design competitive, cost-effective benefits strategies that reduce turnover and attract top talent. Let's build yours.</p>
+      <a href="mailto:tom@tms-solutions-group.com">Schedule a Free Consultation</a>
+    </div>
+
+    <div class="page-footer">
+      TMS Solutions Group &nbsp;&middot;&nbsp; tom@tms-solutions-group.com &nbsp;&middot;&nbsp; tms-solutions-group.com &nbsp;&middot;&nbsp; 386-387-8620
+    </div>
 
   </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="site-footer">
-  tom@tms-solutions-group.com &middot; tms-solutions-group.com &middot; 386-387-8620
-</footer>
+</div>
 
 <script>
-  // ─────────────────────────────────────────────
-  //  Constants
-  // ─────────────────────────────────────────────
-  const BENEFIT_DEFS = [
-    { id: 'health',     label: 'Health Insurance',    points: 40, risk: 'HIGH',   riskClass: 'badge-high',   monthlyCostPerEmp: 600  },
-    { id: 'retirement', label: 'Retirement / 401(k)', points: 25, risk: 'MEDIUM', riskClass: 'badge-medium', monthlyCostPerEmp: 150  },
-    { id: 'pto',        label: 'PTO / Paid Leave',    points: 20, risk: 'MEDIUM', riskClass: 'badge-medium', monthlyCostPerEmp: 200  },
-    { id: 'dental',     label: 'Dental / Vision',     points: 15, risk: 'LOW',    riskClass: 'badge-low',    monthlyCostPerEmp: 50   },
-  ];
+  // ---- BENEFIT METADATA ----
+  const benefitData = {
+    health: {
+      label: 'Health Insurance',
+      pts: 40,
+      importance: '88%',
+      adoption: '56% of small firms',
+      riskOn: 'Low',
+      riskOff: 'High',
+      monthlyCostPerEmp: 746,
+      retentionNote: 'Reduces voluntary turnover significantly; #1 benefit employees demand when job-searching.',
+      context: '56% of small businesses your size already offer this (KFF 2024)'
+    },
+    retirement: {
+      label: 'Retirement / 401(k)',
+      pts: 25,
+      importance: '72%',
+      adoption: '62% of small businesses',
+      riskOn: 'Low',
+      riskOff: 'High',
+      monthlyCostPerEmp: 112,
+      retentionNote: '3% employer match on $45k avg salary; strong long-term retention and loyalty driver.',
+      context: '62% of small businesses already offer a retirement plan (SHRM 2024)'
+    },
+    pto: {
+      label: 'PTO / Paid Leave',
+      pts: 20,
+      importance: '70%',
+      adoption: '74% of small businesses',
+      riskOn: 'Low',
+      riskOff: 'Medium',
+      monthlyCostPerEmp: 45,
+      retentionNote: 'Formalized PTO reduces burnout-driven turnover and sets clear employee expectations.',
+      context: '74% of small businesses already offer formal PTO policies (BLS 2024)'
+    },
+    dental: {
+      label: 'Dental & Vision',
+      pts: 15,
+      importance: '64%',
+      adoption: '48% of small businesses',
+      riskOn: 'Low',
+      riskOff: 'Medium',
+      monthlyCostPerEmp: 60,
+      retentionNote: 'Often expected; absence quietly drives passive job searching among otherwise satisfied employees.',
+      context: '48% of small businesses offer dental and vision coverage (SHRM 2024)'
+    }
+  };
 
-  let results = null;
+  const benefitOrder = ['health', 'retirement', 'pto', 'dental'];
+  const toggleState  = { health: false, retirement: false, pto: false, dental: false };
+  let calcResults    = null;
 
-  function syncToggleStyle(labelId, inputId) {
-    const lbl = document.getElementById(labelId);
-    const chk = document.getElementById(inputId);
-    if (chk.checked) lbl.classList.add('active');
-    else lbl.classList.remove('active');
+  function toggleBenefit(key) {
+    toggleState[key] = !toggleState[key];
+    document.getElementById('toggle-' + key).classList.toggle('active', toggleState[key]);
   }
 
-  function fmt(n) {
-    return '$' + Math.round(n).toLocaleString();
-  }
+  function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
 
-  // ─────────────────────────────────────────────
-  //  Calculate
-  // ─────────────────────────────────────────────
+  // ---- CALCULATE ----
   function calculate() {
-    const businessName  = document.getElementById('businessName').value.trim();
-    const numEmployees  = parseInt(document.getElementById('numEmployees').value) || 0;
-    const monthlySpend  = parseFloat(document.getElementById('monthlySpend').value) || 0;
-    const hasHealth     = document.getElementById('hasHealth').checked;
-    const hasRetirement = document.getElementById('hasRetirement').checked;
-    const hasPTO        = document.getElementById('hasPTO').checked;
-    const hasDental     = document.getElementById('hasDental').checked;
+    const empVal   = parseFloat(document.getElementById('employees').value);
+    const spendVal = parseFloat(document.getElementById('monthlySpend').value);
+    let valid = true;
 
-    if (!numEmployees || numEmployees < 1) {
-      alert('Please enter a valid number of employees.');
-      return;
-    }
-    if (!monthlySpend || monthlySpend < 0) {
-      alert('Please enter your current monthly benefits spend.');
-      return;
+    if (!empVal || empVal < 1) {
+      document.getElementById('err-employees').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('err-employees').style.display = 'none';
     }
 
-    const score = (hasHealth ? 40 : 0) + (hasRetirement ? 25 : 0) + (hasPTO ? 20 : 0) + (hasDental ? 15 : 0);
+    if (isNaN(spendVal) || spendVal < 0) {
+      document.getElementById('err-spend').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('err-spend').style.display = 'none';
+    }
 
-    const annualSpend     = monthlySpend * 12;
-    const costPerEmployee = annualSpend / numEmployees;
-    const benchmark       = 14500;
-    const benchmarkDiff   = costPerEmployee - benchmark;
+    if (!valid) return;
 
-    const replacementCost    = 22500;  // 50% of $45k avg salary
-    const maxTurnoverSavings = numEmployees * 0.035 * replacementCost;
-    const currentRetention   = (score / 100) * maxTurnoverSavings;
-    const turnoverAtRisk     = maxTurnoverSavings - currentRetention;
+    const bizName    = document.getElementById('bizName').value.trim();
+    const employees  = Math.round(empVal);
+    const monthlySpend = spendVal;
 
-    const benefitMap = { health: hasHealth, retirement: hasRetirement, pto: hasPTO, dental: hasDental };
-    const gaps        = BENEFIT_DEFS.filter(b => !benefitMap[b.id]);
-    const improvements = gaps.map(b => ({
-      ...b,
-      totalMonthlyCost: b.monthlyCostPerEmp * numEmployees,
-      retentionImpact:  (b.points / 100) * maxTurnoverSavings,
-    }));
+    // Score
+    let score = 0;
+    if (toggleState.health)     score += 40;
+    if (toggleState.retirement) score += 25;
+    if (toggleState.pto)        score += 20;
+    if (toggleState.dental)     score += 15;
 
-    results = {
-      businessName, numEmployees, monthlySpend, annualSpend,
-      costPerEmployee, benchmark, benchmarkDiff,
-      score, hasHealth, hasRetirement, hasPTO, hasDental, benefitMap,
-      gaps, improvements,
-      currentRetention, maxTurnoverSavings, turnoverAtRisk,
-      replacementCost,
+    let level, levelLabel, levelBg;
+    if (score <= 40)      { level = 'RED';    levelLabel = 'High Opportunity'; levelBg = '#C0392B'; }
+    else if (score <= 70) { level = 'YELLOW'; levelLabel = 'Improving';        levelBg = '#E67E22'; }
+    else                  { level = 'GREEN';  levelLabel = 'Strong Foundation'; levelBg = '#27AE60'; }
+
+    // Financials
+    const annualSpend      = monthlySpend * 12;
+    const annualCostPerEmp = employees > 0 ? annualSpend / employees : 0;
+    const replacementCost  = 33750;           // 75% of $45k avg salary
+    const currentTurnover  = employees * 0.15;
+    const improvedTurnover = employees * 0.11;
+    const retained         = currentTurnover - improvedTurnover;
+    const retentionValue   = retained * replacementCost;
+
+    calcResults = {
+      bizName, employees, monthlySpend, annualSpend, annualCostPerEmp,
+      score, level, levelLabel, levelBg,
+      replacementCost, currentTurnover, improvedTurnover, retained, retentionValue,
+      health:     toggleState.health,
+      retirement: toggleState.retirement,
+      pto:        toggleState.pto,
+      dental:     toggleState.dental
     };
 
-    displayResults();
-  }
+    // ---- Score Banner ----
+    const banner = document.getElementById('score-banner');
+    banner.style.background = levelBg;
+    document.getElementById('score-level-text').textContent = levelLabel + ' - Benefits Coverage Score';
+    document.getElementById('score-sub-text').textContent   = bizName || 'Benefits Assessment';
+    document.getElementById('score-num').textContent        = score;
 
-  // ─────────────────────────────────────────────
-  //  Display Results
-  // ─────────────────────────────────────────────
-  function displayResults() {
-    const r = results;
+    // ---- Metrics ----
+    document.getElementById('metric-your-cost').textContent = fmt(annualCostPerEmp);
+    document.getElementById('metric-retention').textContent = fmt(retentionValue);
 
-    // Score ring
-    const circ   = 2 * Math.PI * 72;
-    const pct    = r.score / 100;
-    const offset = circ - pct * circ;
-    const color  = r.score >= 71 ? '#27AE60' : r.score >= 41 ? '#E67E22' : '#C0392B';
-    const pilllbl= r.score >= 71 ? 'Strong Foundation' : r.score >= 41 ? 'Improving' : 'High Opportunity';
-    const pillCls= r.score >= 71 ? 'pill-green' : r.score >= 41 ? 'pill-yellow' : 'pill-red';
+    // ---- Gap Table ----
+    const tbody = document.getElementById('gap-table-body');
+    tbody.innerHTML = '';
+    benefitOrder.forEach(key => {
+      const d      = benefitData[key];
+      const offered = toggleState[key];
+      const risk    = offered ? d.riskOn : d.riskOff;
+      const rClass  = risk === 'High' ? 'risk-high' : risk === 'Medium' ? 'risk-medium' : 'risk-low';
+      tbody.innerHTML += `
+        <tr>
+          <td><strong>${d.label}</strong></td>
+          <td><span class="status-badge ${offered ? 'badge-green' : 'badge-red'}">${offered ? 'Offered' : 'Not Offered'}</span></td>
+          <td class="${rClass}">${risk}</td>
+          <td>${d.importance} say critical</td>
+          <td>${d.adoption}</td>
+        </tr>`;
+    });
 
-    const arc = document.getElementById('scoreArc');
-    arc.setAttribute('stroke', color);
-    arc.setAttribute('stroke-dasharray', `${circ} ${circ}`);
-    arc.setAttribute('stroke-dashoffset', offset);
+    // ---- Top 3 Improvements ----
+    const gaps   = benefitOrder.filter(k => !toggleState[k]);
+    const impList = document.getElementById('improvements-list');
+    impList.innerHTML = '';
 
-    const ringScore = document.getElementById('ringScore');
-    ringScore.textContent = r.score;
-    ringScore.style.color = color;
-
-    const pill = document.getElementById('scorePill');
-    pill.textContent = pilllbl;
-    pill.className = 'score-pill ' + pillCls;
-
-    // Metrics
-    document.getElementById('mCostPerEmp').textContent = fmt(r.costPerEmployee);
-    const noteEl = document.getElementById('mCostNote');
-    if (r.benchmarkDiff >= 0) {
-      noteEl.textContent = '+' + fmt(Math.abs(r.benchmarkDiff)) + ' above benchmark';
-      noteEl.style.color = '#27AE60';
-    } else {
-      noteEl.textContent = fmt(Math.abs(r.benchmarkDiff)) + ' below benchmark';
-      noteEl.style.color = '#C0392B';
-    }
-    document.getElementById('mRetention').textContent = fmt(r.currentRetention);
-
-    // Title/subtitle
-    document.getElementById('resultsTitle').textContent =
-      r.businessName ? r.businessName + ' — Benefits Score' : 'Your Benefits Score';
-    document.getElementById('resultsSubtitle').textContent =
-      r.numEmployees + ' employees | Monthly spend: ' + fmt(r.monthlySpend);
-
-    // Gap table
-    document.getElementById('gapRows').innerHTML = BENEFIT_DEFS.map(b => {
-      const has = r.benefitMap[b.id];
-      return `
-        <div class="gap-row">
-          <span class="benefit-name">${b.label}</span>
-          <span><span class="badge ${has ? 'badge-yes' : 'badge-no'}">${has ? 'Yes' : 'Missing'}</span></span>
-          <span>${!has
-            ? `<span class="badge ${b.riskClass}">${b.risk} RISK</span>`
-            : '<span class="no-gap">No gap</span>'}</span>
-        </div>`;
-    }).join('');
-
-    // Recommendations
-    const recEl = document.getElementById('recCards');
-    if (r.improvements.length === 0) {
-      recEl.innerHTML = `
-        <div class="all-good">
-          <div class="all-good-title">Your benefits package covers all key areas!</div>
-          <p style="color:#555;font-size:15px">You offer health insurance, retirement, PTO, and dental/vision. Focus on plan quality and employee communication to maximize your retention advantage.</p>
+    if (gaps.length === 0) {
+      impList.innerHTML = `
+        <div class="improvement-card">
+          <h4>You offer all 4 core benefits!</h4>
+          <p style="font-size:14px;color:#555;margin-top:8px;">Focus on optimizing costs and communicating your benefits value to employees. Consider benchmarking your spend against the $13,800 industry average.</p>
         </div>`;
     } else {
-      recEl.innerHTML = r.improvements.slice(0, 3).map((imp, i) => `
-        <div class="rec-card">
-          <div class="rec-priority">#${i + 1} Priority Improvement</div>
-          <div class="rec-name">Add ${imp.label}</div>
-          <div class="rec-stats">
-            <div>
-              <div class="rec-stat-val">${fmt(imp.totalMonthlyCost)}/mo</div>
-              <div class="rec-stat-lbl">Estimated Monthly Cost</div>
+      gaps.slice(0, 3).forEach((key, i) => {
+        const d          = benefitData[key];
+        const totalMonthly = d.monthlyCostPerEmp * employees;
+        impList.innerHTML += `
+          <div class="improvement-card">
+            <h4>#${i + 1} &mdash; Add ${d.label}</h4>
+            <div class="improvement-meta">
+              <span>Est. Monthly Cost: <strong>${fmt(totalMonthly)}/mo</strong></span>
+              <span>Employee Priority: <strong>${d.importance} rate critical</strong></span>
+              <span>Coverage Points: <strong>+${d.pts} pts</strong></span>
             </div>
-            <div>
-              <div class="rec-stat-val">${fmt(imp.retentionImpact)}/yr</div>
-              <div class="rec-stat-lbl">Est. Annual Retention Impact</div>
-            </div>
-          </div>
-        </div>`).join('');
+            <p style="font-size:13px;color:#444;margin-bottom:8px;">${d.retentionNote}</p>
+            <div class="improvement-context">${d.context}</div>
+          </div>`;
+      });
     }
 
+    // ---- Show Results ----
     document.getElementById('landing').style.display = 'none';
     document.getElementById('results').style.display = 'block';
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function resetCalc() {
-    document.getElementById('landing').style.display = 'block';
-    document.getElementById('results').style.display = 'none';
-    window.scrollTo(0, 0);
+  // ===== PDF GENERATION =====
+  function pdfSafe(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/\u2013/g, '-')
+      .replace(/\u2014/g, '-')
+      .replace(/\u00B7/g, '|')
+      .replace(/\u2019/g, "'")
+      .replace(/\u2018/g, "'")
+      .replace(/\u201C/g, '"')
+      .replace(/\u201D/g, '"')
+      .replace(/[^\x00-\x7F]/g, '');
   }
 
-  // ─────────────────────────────────────────────
-  //  PDF Generation
-  // ─────────────────────────────────────────────
   function generatePDF() {
-    function pdfSafe(str) {
-      if (str == null) return '';
-      return String(str)
-        .replace(/\u2013/g, '-')
-        .replace(/\u2014/g, '-')
-        .replace(/\u00B7/g, '|')
-        .replace(/\u2019/g, "'")
-        .replace(/\u2018/g, "'")
-        .replace(/\u201C/g, '"')
-        .replace(/\u201D/g, '"')
-        .replace(/[^\x00-\x7F]/g, '');
-    }
-
     try {
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit: 'mm', format: 'letter' });
-      const r = results;
+      const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+      const r   = calcResults;
+      if (!r) { alert('Please calculate your results first.'); return; }
 
-      const PW     = 215.9;
-      const PH     = 279.4;
-      const M      = 18;
-      const CW     = PW - M * 2;
+      const W = 612, H = 792;
 
-      // Color arrays
-      const CREAM  = [250, 250, 247];
-      const GOLD   = [184, 134, 11];
-      const DARK   = [26,  26,  26 ];
-      const WHITE  = [255, 255, 255];
-      const RED    = [192, 57,  43 ];
-      const YELLOW = [230, 126, 34 ];
-      const GREEN  = [39,  174, 96 ];
-      const GRAY   = [120, 120, 120];
-      const LGRAY  = [235, 235, 232];
-      const MGRAY  = [175, 175, 172];
+      // Color palettes
+      const cream  = [250, 250, 247];
+      const gold   = [184, 134, 11];
+      const dark   = [26,  26,  26];
+      const white  = [255, 255, 255];
+      const red    = [192, 57,  43];
+      const yellow = [230, 126, 34];
+      const green  = [39,  174, 96];
+      const light  = [240, 240, 234];
+      const gray   = [100, 100, 100];
+      const lgray  = [160, 160, 160];
 
-      const sColor = r.score >= 71 ? GREEN : r.score >= 41 ? YELLOW : RED;
-      const sLabel = r.score >= 71 ? 'STRONG FOUNDATION' : r.score >= 41 ? 'IMPROVING' : 'HIGH OPPORTUNITY';
+      const scoreColor = r.level === 'RED' ? red : r.level === 'YELLOW' ? yellow : green;
 
-      function fmtP(n) { return '$' + Math.round(n).toLocaleString(); }
+      // ---- PAGE BASE ----
+      function drawBase(pageNum) {
+        doc.setFillColor(...cream);
+        doc.rect(0, 0, W, H, 'F');
 
-      function bg(doc) {
-        doc.setFillColor(...CREAM);
-        doc.rect(0, 0, PW, PH, 'F');
-      }
-
-      function header(doc) {
-        doc.setFillColor(...GOLD);
-        doc.rect(0, 0, PW, 28, 'F');
-
-        doc.setTextColor(...WHITE);
+        doc.setFillColor(...dark);
+        doc.rect(0, 0, W, 44, 'F');
+        doc.setTextColor(...gold);
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(9);
-        doc.text(pdfSafe('TMS SOLUTIONS GROUP'), M, 9);
-
-        doc.setFont('times', 'bold');
-        doc.setFontSize(17);
-        doc.text(pdfSafe('Employee Benefits Optimizer'), M, 21);
-
+        doc.setFontSize(12);
+        doc.text('TMS Solutions Group', 36, 28);
+        doc.setTextColor(...cream);
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
-        doc.text(pdfSafe('April 18, 2026'), PW - M, 9, { align: 'right' });
-      }
+        doc.text('Employee Benefits Optimizer', W - 36, 28, { align: 'right' });
 
-      function footer(doc) {
-        doc.setFillColor(...GOLD);
-        doc.rect(0, PH - 11, PW, 11, 'F');
-        doc.setTextColor(...WHITE);
+        doc.setFillColor(...dark);
+        doc.rect(0, H - 36, W, 36, 'F');
+        doc.setTextColor(...lgray);
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
-        doc.text(
-          pdfSafe('tom@tms-solutions-group.com | tms-solutions-group.com | 386-387-8620'),
-          PW / 2, PH - 4, { align: 'center' }
-        );
+        doc.text(pdfSafe('tom@tms-solutions-group.com | tms-solutions-group.com | 386-387-8620'), W / 2, H - 13, { align: 'center' });
+        doc.setTextColor(...gold);
+        doc.text('Page ' + pageNum, W - 36, H - 13, { align: 'right' });
       }
 
-      function sectionBar(doc, yPos, title) {
-        doc.setFillColor(...GOLD);
-        doc.rect(M, yPos, CW, 7.5, 'F');
-        doc.setTextColor(...WHITE);
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(9);
-        doc.text(pdfSafe(title), M + 3, yPos + 5.5);
-        return yPos + 10;
-      }
+      // =====================
+      // PAGE 1
+      // =====================
+      drawBase(1);
+      let y = 64;
 
-      // ==============================
-      //  PAGE 1
-      // ==============================
-      bg(doc);
-      header(doc);
-
-      let y = 32;
-
-      // Business name + subtitle
-      if (r.businessName) {
+      // Title / biz name
+      if (r.bizName) {
         doc.setFont('times', 'bold');
-        doc.setFontSize(14);
-        doc.setTextColor(...DARK);
-        doc.text(pdfSafe(r.businessName), M, y);
-        y += 6;
+        doc.setFontSize(18);
+        doc.setTextColor(...dark);
+        doc.text(pdfSafe(r.bizName), 36, y);
+        y += 20;
       }
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(9);
-      doc.setTextColor(...GRAY);
-      doc.text(
-        pdfSafe(r.numEmployees + ' employees | Monthly spend: ' + fmtP(r.monthlySpend)),
-        M, y
-      );
-      y += 10;
+      doc.setTextColor(...gray);
+      doc.text('Generated: April 18, 2026', 36, y);
+      y += 22;
 
-      // Score circle (right side)
-      const cx = PW - M - 24;
-      const cy = y + 22;
-      const cr = 21;
-
-      doc.setFillColor(...sColor);
-      doc.circle(cx, cy, cr, 'F');
-
-      doc.setTextColor(...WHITE);
+      // Score banner
+      doc.setFillColor(...scoreColor);
+      doc.roundedRect(36, y, W - 72, 64, 6, 6, 'F');
+      doc.setTextColor(...white);
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(22);
-      doc.text(pdfSafe(String(r.score)), cx, cy - 2, { align: 'center' });
-      doc.setFontSize(8);
-      doc.text(pdfSafe('/ 100'), cx, cy + 6, { align: 'center' });
-
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...sColor);
-      doc.text(pdfSafe(sLabel), cx, cy + cr + 6, { align: 'center' });
-
-      // Score breakdown (left side)
-      doc.setFont('times', 'bold');
-      doc.setFontSize(13);
-      doc.setTextColor(...DARK);
-      doc.text(pdfSafe('Benefits Coverage Score'), M, y + 10);
-
+      doc.setFontSize(14);
+      doc.text(pdfSafe(r.levelLabel + ' - Benefits Coverage Score'), 54, y + 22);
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8.5);
-      doc.setTextColor(...GRAY);
-      const scoreBreakdown = pdfSafe(
-        'Health: ' + (r.hasHealth ? '40 pts' : '0 pts') +
-        '   Retirement: ' + (r.hasRetirement ? '25 pts' : '0 pts') +
-        '   PTO: ' + (r.hasPTO ? '20 pts' : '0 pts') +
-        '   Dental: ' + (r.hasDental ? '15 pts' : '0 pts')
-      );
-      doc.text(scoreBreakdown, M, y + 18);
-
-      y = cy + cr + 12;
-
-      // ─── 3 Metric Boxes ───
-      const bw = (CW - 8) / 3;
-      const bh = 28;
-
-      const metrics = [
-        {
-          val:  fmtP(r.costPerEmployee),
-          lbl:  'Annual Cost Per Employee',
-          note: r.benchmarkDiff >= 0
-            ? '+' + fmtP(Math.abs(r.benchmarkDiff)) + ' above benchmark'
-            : fmtP(Math.abs(r.benchmarkDiff)) + ' below benchmark',
-        },
-        { val: fmtP(r.benchmark),        lbl: 'SHRM Benchmark',       note: 'National Average'       },
-        { val: fmtP(r.currentRetention), lbl: 'Current Retention Value', note: 'Annual Turnover Savings' },
-      ];
-
-      metrics.forEach((m, i) => {
-        const bx = M + i * (bw + 4);
-        doc.setFillColor(...WHITE);
-        doc.setDrawColor(...LGRAY);
-        doc.setLineWidth(0.3);
-        doc.roundedRect(bx, y, bw, bh, 2, 2, 'FD');
-
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(13);
-        doc.setTextColor(...DARK);
-        doc.text(pdfSafe(m.val), bx + bw / 2, y + 9, { align: 'center' });
-
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(6.5);
-        doc.setTextColor(...GRAY);
-        doc.text(pdfSafe(m.lbl.toUpperCase()), bx + bw / 2, y + 16, { align: 'center' });
-
-        doc.setFontSize(7);
-        doc.setTextColor(...GOLD);
-        doc.text(pdfSafe(m.note), bx + bw / 2, y + 22, { align: 'center' });
-      });
-
-      y += bh + 10;
-
-      // ─── Gap Analysis Table ───
-      doc.setFont('times', 'bold');
-      doc.setFontSize(12);
-      doc.setTextColor(...DARK);
-      doc.text(pdfSafe('Benefits Gap Analysis'), M, y);
-      y += 5;
-
-      // Table header row
-      doc.setFillColor(...DARK);
-      doc.rect(M, y, CW, 8, 'F');
-      doc.setTextColor(...WHITE);
+      doc.setFontSize(9.5);
+      const bannerSub = r.bizName
+        ? pdfSafe(r.bizName + '  |  ' + r.employees + ' Employees')
+        : pdfSafe(r.employees + ' Employees');
+      doc.text(bannerSub, 54, y + 40);
+      // Score circle (right)
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(7);
-      const c1 = M + 3;
-      const c2 = M + CW * 0.55;
-      const c3 = M + CW * 0.75;
-      doc.text(pdfSafe('BENEFIT'), c1, y + 5.5);
-      doc.text(pdfSafe('STATUS'), c2, y + 5.5);
-      doc.text(pdfSafe('TURNOVER RISK'), c3, y + 5.5);
-      y += 8;
+      doc.setFontSize(30);
+      doc.text(String(r.score), W - 66, y + 36, { align: 'center' });
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.text('/ 100', W - 66, y + 52, { align: 'center' });
+      y += 80;
+
+      // 3 Metric Boxes
+      const bw = (W - 72 - 20) / 3;
+      const metricDefs = [
+        { label: 'Your Annual Cost Per Employee', value: '$' + Math.round(r.annualCostPerEmp).toLocaleString(), sub: 'based on your inputs', hilight: false },
+        { label: 'Industry Benchmark',             value: '$13,800',                                             sub: 'BLS avg per employee/year', hilight: false },
+        { label: 'Est. Annual Retention Value',    value: '$' + Math.round(r.retentionValue).toLocaleString(),  sub: 'from full benefits adoption', hilight: true  }
+      ];
+      metricDefs.forEach((m, i) => {
+        const bx = 36 + i * (bw + 10);
+        doc.setFillColor(...white);
+        doc.roundedRect(bx, y, bw, 60, 4, 4, 'F');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(...lgray);
+        const llines = doc.splitTextToSize(pdfSafe(m.label), bw - 12);
+        doc.text(llines, bx + bw / 2, y + 12, { align: 'center' });
+        const valColor = m.hilight ? gold : dark;
+        doc.setTextColor(...valColor);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(15);
+        doc.text(pdfSafe(m.value), bx + bw / 2, y + 38, { align: 'center' });
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(...lgray);
+        doc.text(pdfSafe(m.sub), bx + bw / 2, y + 52, { align: 'center' });
+      });
+      y += 76;
+
+      // Gap Analysis Table
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(...dark);
+      doc.text('Benefits Gap Analysis', 36, y);
+      y += 13;
+
+      const colW  = [158, 82, 72, 116, 110];
+      const heads = ['Benefit', 'Status', 'Risk', 'Employee Priority', 'Peer Adoption'];
+      doc.setFillColor(...dark);
+      doc.rect(36, y, W - 72, 22, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.setTextColor(...cream);
+      let cx = 36;
+      heads.forEach((h, i) => { doc.text(pdfSafe(h), cx + 6, y + 14); cx += colW[i]; });
+      y += 22;
 
       const tableRows = [
-        { name: 'Health Insurance',    has: r.hasHealth,     risk: 'HIGH',   rc: RED    },
-        { name: 'Retirement / 401(k)', has: r.hasRetirement, risk: 'MEDIUM', rc: YELLOW },
-        { name: 'PTO / Paid Leave',    has: r.hasPTO,        risk: 'MEDIUM', rc: YELLOW },
-        { name: 'Dental / Vision',     has: r.hasDental,     risk: 'LOW',    rc: GREEN  },
+        { key: 'health',     label: 'Health Insurance',    imp: '88% say critical', adopt: '56% of small firms'      },
+        { key: 'retirement', label: 'Retirement / 401(k)', imp: '72% say critical', adopt: '62% of small businesses' },
+        { key: 'pto',        label: 'PTO / Paid Leave',    imp: '70% say critical', adopt: '74% of small businesses' },
+        { key: 'dental',     label: 'Dental & Vision',     imp: '64% say critical', adopt: '48% of small businesses' }
       ];
-      const rh = 10;
-      tableRows.forEach((row, i) => {
-        doc.setFillColor(...(i % 2 === 0 ? LGRAY : WHITE));
-        doc.rect(M, y, CW, rh, 'F');
 
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(...DARK);
-        doc.text(pdfSafe(row.name), c1, y + 6.8);
-
-        // Status badge
-        const stColor = row.has ? GREEN : RED;
-        const stText  = row.has ? 'Yes' : 'Missing';
-        doc.setFillColor(...stColor);
-        doc.roundedRect(c2 - 1, y + 2, 22, 6, 1, 1, 'F');
-        doc.setTextColor(...WHITE);
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7);
-        doc.text(pdfSafe(stText), c2 + 10, y + 6.3, { align: 'center' });
-
-        // Risk badge
-        if (!row.has) {
-          doc.setFillColor(...row.rc);
-          doc.roundedRect(c3 - 1, y + 2, 30, 6, 1, 1, 'F');
-          doc.setTextColor(...WHITE);
-          doc.setFont('helvetica', 'bold');
-          doc.setFontSize(7);
-          doc.text(pdfSafe(row.risk + ' RISK'), c3 + 14, y + 6.3, { align: 'center' });
-        } else {
-          doc.setTextColor(...MGRAY);
-          doc.setFont('helvetica', 'normal');
-          doc.setFontSize(8);
-          doc.text(pdfSafe('No gap'), c3, y + 6.5);
-        }
-        y += rh;
-      });
-
-      // Table border
-      doc.setDrawColor(...LGRAY);
-      doc.setLineWidth(0.3);
-      doc.rect(M, y - rh * 4 - 8, CW, rh * 4 + 8, 'S');
-
-      y += 8;
-
-      // At-risk callout box
-      if (r.turnoverAtRisk > 0) {
-        const boxHt = 16;
-        doc.setFillColor(255, 240, 238);
-        doc.roundedRect(M, y, CW, boxHt, 2, 2, 'F');
-        doc.setTextColor(...RED);
+      tableRows.forEach((row, idx) => {
+        const offered   = r[row.key];
+        const risk      = offered ? 'Low' : (row.key === 'health' || row.key === 'retirement' ? 'High' : 'Medium');
+        const riskColor = risk === 'High' ? red : risk === 'Medium' ? yellow : green;
+        if (idx % 2 === 1) { doc.setFillColor(...light); doc.rect(36, y, W - 72, 22, 'F'); }
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(9);
-        doc.text(
-          pdfSafe('!! Annual Turnover Cost at Risk: ' + fmtP(r.turnoverAtRisk)),
-          M + 4, y + 6
-        );
+        doc.setTextColor(...dark);
+        doc.text(pdfSafe(row.label), 42, y + 14);
+        // Status pill
+        doc.setFillColor(...(offered ? green : red));
+        doc.roundedRect(36 + colW[0] + 2, y + 4, 66, 14, 3, 3, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7.5);
+        doc.setTextColor(...white);
+        doc.text(offered ? 'Offered' : 'Not Offered', 36 + colW[0] + 35, y + 14, { align: 'center' });
+        // Risk
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8.5);
+        doc.setTextColor(...riskColor);
+        doc.text(risk, 36 + colW[0] + colW[1] + 6, y + 14);
+        // Importance + adoption
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
-        doc.text(
-          pdfSafe('Closing your benefits gaps could save up to ' + fmtP(r.turnoverAtRisk) + ' per year in employee replacement costs.'),
-          M + 4, y + 12
-        );
-        y += boxHt + 4;
-      }
-
-      footer(doc);
-
-      // ==============================
-      //  PAGE 2
-      // ==============================
-      doc.addPage();
-      bg(doc);
-      header(doc);
-      y = 34;
-
-      // ─── Cost Breakdown ───
-      y = sectionBar(doc, y, 'DETAILED COST BREAKDOWN');
-
-      const costRows = [
-        ['Monthly Benefits Spend',          fmtP(r.monthlySpend)],
-        ['Annual Benefits Spend',           fmtP(r.annualSpend)],
-        ['Annual Cost Per Employee',        fmtP(r.costPerEmployee)],
-        ['SHRM National Benchmark (per employee)', fmtP(r.benchmark)],
-        ['Benchmark Difference',            (r.benchmarkDiff >= 0 ? '+' : '') + fmtP(r.benchmarkDiff)],
-      ];
-      costRows.forEach((row, i) => {
-        if (i % 2 === 0) { doc.setFillColor(...LGRAY); doc.rect(M, y, CW, 9, 'F'); }
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(...DARK);
-        doc.text(pdfSafe(row[0]), M + 3, y + 6.3);
-        doc.setFont('helvetica', 'bold');
-        doc.text(pdfSafe(row[1]), PW - M - 3, y + 6.3, { align: 'right' });
-        y += 9;
+        doc.setTextColor(...dark);
+        doc.text(pdfSafe(row.imp),   36 + colW[0] + colW[1] + colW[2] + 6, y + 14);
+        doc.text(pdfSafe(row.adopt), 36 + colW[0] + colW[1] + colW[2] + colW[3] + 6, y + 14);
+        y += 22;
       });
-      y += 8;
+      y += 14;
 
-      // ─── Turnover Cost Model ───
-      y = sectionBar(doc, y, 'TURNOVER COST MODEL');
+      // Top 3 Recommendations (Page 1)
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(...dark);
+      doc.text('Top Recommendations', 36, y);
+      y += 13;
 
-      const turnRows = [
-        ['Average US SMB Salary',             '$45,000'],
-        ['Replacement Cost (50% of salary)',  fmtP(r.replacementCost)],
-        ['Baseline Annual Turnover Rate',     '15.0%'],
-        ['Turnover Rate with Strong Benefits','11.5%'],
-        ['Reduction in Turnover Rate',        '3.5%'],
-        ['Employees Retained (current score)',String((r.numEmployees * 0.035 * r.score / 100).toFixed(1))],
-        ['Current Annual Retention Value',    fmtP(r.currentRetention)],
-        ['Max Potential if Fully Covered',    fmtP(r.maxTurnoverSavings)],
-      ];
-      turnRows.forEach((row, i) => {
-        if (i % 2 === 0) { doc.setFillColor(...LGRAY); doc.rect(M, y, CW, 9, 'F'); }
+      const gaps = benefitOrder.filter(k => !r[k]);
+      if (gaps.length === 0) {
         doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(...DARK);
-        doc.text(pdfSafe(row[0]), M + 3, y + 6.3);
-        doc.setFont('helvetica', 'bold');
-        doc.text(pdfSafe(row[1]), PW - M - 3, y + 6.3, { align: 'right' });
-        y += 9;
-      });
-      y += 8;
-
-      // ─── Top Recommendations ───
-      if (r.improvements.length > 0) {
-        y = sectionBar(doc, y, 'TOP BENEFIT IMPROVEMENTS');
-        r.improvements.slice(0, 3).forEach((imp, i) => {
-          doc.setFillColor(...WHITE);
-          doc.setDrawColor(...LGRAY);
-          doc.setLineWidth(0.3);
-          doc.roundedRect(M, y, CW, 18, 2, 2, 'FD');
-
-          doc.setFillColor(...GOLD);
-          doc.rect(M, y, 3, 18, 'F');
-
+        doc.setFontSize(9.5);
+        doc.setTextColor(...green);
+        doc.text('You offer all 4 core benefits. Focus on cost optimization and employee communication.', 36, y);
+      } else {
+        gaps.slice(0, 3).forEach((key, i) => {
+          if (y > 670) return;
+          const d   = benefitData[key];
+          const tot = d.monthlyCostPerEmp * r.employees;
+          doc.setFillColor(...white);
+          doc.roundedRect(36, y, W - 72, 52, 4, 4, 'F');
+          doc.setFillColor(...gold);
+          doc.rect(36, y, 4, 52, 'F');
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(9);
-          doc.setTextColor(...GOLD);
-          doc.text(pdfSafe('#' + (i + 1) + ' Priority - ' + imp.label), M + 6, y + 6.5);
-
+          doc.setFontSize(9.5);
+          doc.setTextColor(...dark);
+          doc.text(pdfSafe('#' + (i + 1) + ' - Add ' + d.label), 48, y + 14);
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(8.5);
-          doc.setTextColor(...DARK);
+          doc.setFontSize(8);
+          doc.setTextColor(...gray);
           doc.text(
-            pdfSafe('Est. Monthly Cost: ' + fmtP(imp.totalMonthlyCost) + '   |   Annual Retention Impact: ' + fmtP(imp.retentionImpact)),
-            M + 6, y + 13.5
+            pdfSafe('Est. Monthly Cost: $' + Math.round(tot).toLocaleString() + '/mo   |   Employee Priority: ' + d.importance + '   |   +' + d.pts + ' coverage pts'),
+            48, y + 27
           );
-          y += 21;
+          doc.setFontSize(8);
+          doc.setTextColor(...gold);
+          doc.text(pdfSafe(d.context), 48, y + 42);
+          y += 60;
         });
-        y += 6;
       }
 
-      // ─── Benchmark Context ───
-      y = sectionBar(doc, y, 'BENCHMARK CONTEXT');
+      // =====================
+      // PAGE 2
+      // =====================
+      doc.addPage();
+      drawBase(2);
+      y = 64;
 
-      const ctxText = pdfSafe(
-        'The $14,500 SHRM benchmark represents average annual employer spending on benefits per employee ' +
-        'for US small and mid-sized businesses. Organizations at or above this benchmark typically experience ' +
-        'stronger retention, higher engagement scores, and better talent acquisition outcomes. Strong benefits ' +
-        'programs reduce voluntary turnover by an estimated 3-5 percentage points annually, translating to ' +
-        'significant cost savings in recruiting, onboarding, and lost productivity.'
-      );
-      const ctxLines = doc.splitTextToSize(ctxText, CW - 6);
+      doc.setFont('times', 'bold');
+      doc.setFontSize(15);
+      doc.setTextColor(...dark);
+      doc.text('Full Cost Breakdown & Methodology', 36, y);
+      y += 24;
+
+      // --- Full Cost Breakdown Table ---
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(...dark);
+      doc.text('Full Benefits Cost Breakdown', 36, y);
+      y += 12;
+
+      const cb = [170, 112, 116, 0];   // last col fills remainder
+      const cbH = ['Benefit', 'Monthly / Employee', 'Annual / Employee', 'Total Annual (' + r.employees + ' emp)'];
+      doc.setFillColor(...dark);
+      doc.rect(36, y, W - 72, 22, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.setTextColor(...cream);
+      cx = 36;
+      cbH.forEach((h, i) => { doc.text(pdfSafe(h), cx + 6, y + 14); cx += (cb[i] || (W - 72 - 170 - 112 - 116)); });
+      y += 22;
+
+      const cbRows = [
+        { label: 'Health Insurance',    monthly: 746, annual: 8951 },
+        { label: 'Retirement / 401(k)', monthly: 112, annual: 1350 },
+        { label: 'PTO / Paid Leave',    monthly: 45,  annual: 540  },
+        { label: 'Dental & Vision',     monthly: 60,  annual: 720  }
+      ];
+      const cbRemainder = W - 72 - 170 - 112 - 116;
+
+      cbRows.forEach((row, idx) => {
+        if (idx % 2 === 1) { doc.setFillColor(...light); doc.rect(36, y, W - 72, 22, 'F'); }
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        doc.setTextColor(...dark);
+        doc.text(pdfSafe(row.label), 42, y + 14);
+        doc.setFont('helvetica', 'normal');
+        doc.text(pdfSafe('$' + row.monthly + '/mo'),                       36 + 170 + 6,             y + 14);
+        doc.text(pdfSafe('$' + row.annual.toLocaleString() + '/yr'),       36 + 170 + 112 + 6,       y + 14);
+        doc.text(pdfSafe('$' + (row.annual * r.employees).toLocaleString()), 36 + 170 + 112 + 116 + 6, y + 14);
+        y += 22;
+      });
+
+      // Total row
+      const totalAnnual = (8951 + 1350 + 540 + 720) * r.employees;
+      const totalMonthly = Math.round((8951 + 1350 + 540 + 720) / 12);
+      doc.setFillColor(...gold);
+      doc.rect(36, y, W - 72, 22, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(...white);
+      doc.text('Full Package Total',                               42,                    y + 14);
+      doc.text(pdfSafe('$' + totalMonthly.toLocaleString() + '/mo avg'), 36 + 170 + 6,   y + 14);
+      doc.text(pdfSafe('$' + (8951+1350+540+720).toLocaleString() + '/yr'), 36+170+112+6, y + 14);
+      doc.text(pdfSafe('$' + totalAnnual.toLocaleString()),      36+170+112+116+6,        y + 14);
+      y += 22;
+
+      // Your current spend row
+      doc.setFillColor(...light);
+      doc.rect(36, y, W - 72, 22, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(...dark);
+      doc.text('Your Current Spend',                                   42,              y + 14);
+      doc.setFont('helvetica', 'normal');
+      doc.text(pdfSafe('$' + Math.round(r.monthlySpend).toLocaleString() + '/mo'),    36+170+6,      y + 14);
+      doc.text(pdfSafe('$' + Math.round(r.annualSpend).toLocaleString() + '/yr'),     36+170+112+6,  y + 14);
+      doc.text(pdfSafe('$' + Math.round(r.annualCostPerEmp).toLocaleString() + '/emp'), 36+170+112+116+6, y + 14);
+      y += 30;
+
+      // --- Turnover Cost Model ---
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(...dark);
+      doc.text('Turnover Cost Model & Assumptions', 36, y);
+      y += 12;
+
+      doc.setFillColor(...white);
+      doc.roundedRect(36, y, W - 72, 94, 4, 4, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...dark);
+      doc.text('Model Inputs:', 48, y + 14);
+      const assumptions = [
+        'Average employee salary: $45,000/year (U.S. national small business average)',
+        'Replacement cost: 75% of annual salary = $33,750 per employee (Gallup/SHRM range: 50%-200%)',
+        'Current annual turnover rate: 15% (U.S. national average, BLS 2024)',
+        'Turnover with strong benefits package: 11% (SHRM benefits-driven retention research)',
+        'Employees replaced currently: ' + r.currentTurnover.toFixed(1) + '   |   With full benefits: ' + r.improvedTurnover.toFixed(1) + '   |   Retained: ' + r.retained.toFixed(1)
+      ];
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(8.5);
-      doc.setTextColor(...DARK);
-      doc.text(ctxLines, M + 3, y);
-      y += ctxLines.length * 5 + 10;
+      doc.setTextColor(...gray);
+      assumptions.forEach((a, i) => { doc.text(pdfSafe('- ' + a), 48, y + 28 + i * 12); });
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(...gold);
+      doc.text(pdfSafe('Estimated Annual Retention Value: $' + Math.round(r.retentionValue).toLocaleString()), 48, y + 82);
+      y += 108;
 
-      // ─── Disclaimer ───
-      const disclaimText = pdfSafe(
-        'Disclaimer: This report is for informational purposes only. Cost and retention estimates use ' +
-        'national averages and may vary significantly by industry, region, and company size. Retention ' +
-        'values are modeled projections, not guarantees. Consult a licensed HR or benefits professional ' +
-        'before making coverage changes. TMS Solutions Group is not a licensed insurance provider.'
-      );
-      const disclaimLines = doc.splitTextToSize(disclaimText, CW - 8);
-      const dBoxH = disclaimLines.length * 4.5 + 10;
-      doc.setFillColor(...LGRAY);
-      doc.roundedRect(M, y, CW, dBoxH, 2, 2, 'F');
+      // --- Benchmark Context ---
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(...dark);
+      doc.text('Benchmark Context', 36, y);
+      y += 12;
+
+      const ctxText = 'The Bureau of Labor Statistics (BLS) reports that employer costs for employee compensation average 30% of total compensation for private industry workers, with benefits averaging $13,800 per employee annually for small businesses. The Kaiser Family Foundation (KFF) 2024 Employer Health Benefits Survey found average employer costs for single health coverage at $8,951/year, with only 56% of small firms with 10-24 employees offering health insurance - a major competitive gap. SHRM 2024 data shows 62% of small businesses offer retirement plans, 74% offer formal PTO policies, and 48% include dental and vision coverage. Gallup and SHRM research consistently finds employee replacement costs range from 50% to 200% of annual salary, with 75% used here as a conservative baseline.';
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(7.5);
-      doc.setTextColor(...GRAY);
-      doc.text(disclaimLines, M + 4, y + 6);
+      doc.setFontSize(8.5);
+      doc.setTextColor(...gray);
+      const ctxLines = doc.splitTextToSize(pdfSafe(ctxText), W - 72);
+      doc.text(ctxLines, 36, y);
+      y += ctxLines.length * 11 + 16;
 
-      footer(doc);
+      // --- Data Sources ---
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(...dark);
+      doc.text('Data Sources', 36, y);
+      y += 12;
+      const sources = [
+        'Bureau of Labor Statistics (BLS) -- Employer Costs for Employee Compensation, 2024',
+        'Kaiser Family Foundation (KFF) -- Employer Health Benefits Survey, 2024',
+        'SHRM (Society for Human Resource Management) -- Employee Benefits Survey, 2024',
+        'Gallup -- Cost of Employee Turnover / Engagement Research, 2024'
+      ];
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...gray);
+      sources.forEach(s => { doc.text(pdfSafe('- ' + s), 36, y); y += 12; });
+      y += 10;
 
-      // ─── Save ───
-      const safeName = pdfSafe(r.businessName || 'Report')
-        .replace(/[^a-zA-Z0-9 -]/g, '')
-        .replace(/\s+/g, '-')
-        .trim() || 'Report';
-      doc.save(pdfSafe('TMS-Benefits-Optimizer-' + safeName + '.pdf'));
+      // --- Disclaimer ---
+      if (y < H - 100) {
+        doc.setFillColor(...light);
+        doc.roundedRect(36, y, W - 72, 60, 4, 4, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        doc.setTextColor(...gray);
+        doc.text('Disclaimer', 42, y + 12);
+        const disc = 'This report is provided for informational purposes only and is based on national benchmark data. Actual costs and outcomes vary by industry, location, workforce demographics, and business circumstances. Cost estimates are averages and do not constitute professional financial, legal, or HR advice. Consult a qualified benefits advisor before making changes to your benefits program. TMS Solutions Group makes no guarantees regarding specific outcomes.';
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        const discLines = doc.splitTextToSize(pdfSafe(disc), W - 84);
+        doc.text(discLines, 42, y + 24);
+      }
+
+      // ---- Save ----
+      const safeName = r.bizName ? r.bizName.replace(/[^a-zA-Z0-9]/g, '-') : 'My-Business';
+      doc.save('TMS-Benefits-Optimizer-' + safeName + '.pdf');
 
     } catch (err) {
       console.error('PDF generation error:', err);
